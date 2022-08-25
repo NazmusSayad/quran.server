@@ -1,0 +1,19 @@
+{
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon .",
+    "serve": "node ."
+  },
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": "16.16.0"
+  },
+  "dependencies": {
+    "cors": "latest",
+    "axios": "latest",
+    "dotenv": "latest",
+    "express": "latest",
+    "mongoose": "latest"
+  }
+}
