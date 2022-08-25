@@ -1,10 +1,19 @@
 const express = require('express')
 const cors = require('cors')
-const router = require('./router/route.js')
+const router = require('./router/router')
+const response = require('./utils/response')
 const app = express()
-module.exports = app
 
 app.use(cors())
 app.use(express.json())
 
-app.use(`/v1/api/`, router)
+app.use((req, res, next) => {
+  res.success = response.success
+  res.fail = response.fail
+  next()
+})
+
+app.use(`/v1`, router)
+
+module.exports = app
+
