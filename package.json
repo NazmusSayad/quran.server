@@ -4,16 +4,30 @@
     "start": "nodemon .",
     "serve": "node ."
   },
-  "author": "",
+  "author": "Nazmus Sayad",
   "license": "ISC",
   "engines": {
     "node": "16.16.0"
   },
   "dependencies": {
-    "cors": "latest",
-    "axios": "latest",
-    "dotenv": "latest",
-    "express": "latest",
-    "mongoose": "latest"
-  }
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.5.3"
+  },
+  "name": "quran",
+  "version": "1.0.0",
+  "description": "quran app backend",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NazmusSayad/quran.server.git"
+  },
+  "keywords": [
+    "quran"
+  ],
+  "bugs": {
+    "url": "https://github.com/NazmusSayad/quran.server/issues"
+  },
+  "homepage": "https://github.com/NazmusSayad/quran.server#readme"
 }
