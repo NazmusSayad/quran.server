@@ -3,7 +3,7 @@ const simplifyError = require('./error')
 exports.success = function (code = 200, data = {}) {
   this.status(code).json({
     status: 'success',
-    ...data,
+    data,
   })
 }
 

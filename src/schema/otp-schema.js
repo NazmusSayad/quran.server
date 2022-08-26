@@ -6,6 +6,7 @@ module.exports = mongoose.Schema(
       type: 'string',
       required: true,
       unique: true,
+      lowercase: true,
     },
     code: {
       type: Number,

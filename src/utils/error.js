@@ -8,7 +8,8 @@ const handleValidationError = err => {
 }
 
 module.exports = err => {
+  if (typeof err === 'string') return err
   if (err?.code === 11000) return handleDuplicateError(err)
-  if (err.name === 'ValidationError') return handleValidationError(err)
+  if (err?.name === 'ValidationError') return handleValidationError(err)
   return [err.message]
 }

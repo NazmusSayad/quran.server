@@ -5,6 +5,7 @@ const Bookmark = require('../controller/bookmark-controller')
 
 router
   .route('/')
+  .get(Auth.check, Bookmark.get)
   .post(Auth.check, Bookmark.add)
   .delete(Auth.check, Bookmark.delete)
 

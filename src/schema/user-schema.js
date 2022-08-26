@@ -1,19 +1,31 @@
 const mongoose = require('mongoose')
+const settingsSchema = require('./settings-schema')
+const bookmarkSchema = require('./bookmark-schema')
 
 module.exports = mongoose.Schema(
   {
     email: {
-      type: 'string',
+      type: String,
       unique: true,
+      immutable: true,
+      lowercase: true,
       required: [true, 'User must have a email.'],
     },
     name: {
-      type: 'string',
+      type: String,
       required: [true, 'User must have a name.'],
     },
     password: {
-      type: 'string',
+      type: String,
       required: [true, 'User must have a password.'],
+    },
+    settings: {
+      type: mongoose.Types.ObjectId,
+      ref: 'Settings',
+    },
+    bookmarks: {
+      type: mongoose.Types.ObjectId,
+      ref: 'Bookmark',
     },
   },
   { versionKey: false }
