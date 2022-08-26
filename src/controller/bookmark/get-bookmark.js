@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
     }
 
     const bookmarks = await bookmarkQuery
-    res.success(200, { bookmarks: formatBookmark(bookmarks._doc) })
+    res.success(200, formatBookmark(bookmarks._doc))
   } catch (err) {
     res.fail(err)
   }

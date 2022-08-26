@@ -1,15 +1,10 @@
 const Bookmark = require('../../model/bookmark-model')
-const makeQueryObj = require('./make-query-obj')
+const formatQuery = require('./format-query')
 
 module.exports = async (req, res) => {
   try {
-    let bookmarkId = req.user.bookmarks
-
-    if (!bookmarkId) {
-      throw new Error(`User doesn't have any bookmark yet.`)
-    }
-    await Bookmark.findByIdAndUpdate(bookmarkId, {
-      $unset: makeQueryObj(req.query),
+    await Bookmark.findByIdAndUpdate(req.user.bookmarks, {
+      $unset: formatQuery(req.query),
     })
 
     res.success(204)
