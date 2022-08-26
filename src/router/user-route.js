@@ -1,12 +1,13 @@
 const express = require('express')
-const User = require('../controller/user-controller')
 const router = express.Router()
+const Auth = require('../controller/auth-controller')
+const User = require('../controller/user-controller')
 
 router
   .route('/')
-  .get(User.get)
   .post(User.create)
-  .patch(User.verify, User.modify)
-  .delete(User.verify, User.delete)
+  .get(Auth.check, User.get)
+  .patch(Auth.check, User.modify)
+  .delete(Auth.check, User.delete)
 
 module.exports = router

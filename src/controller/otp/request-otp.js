@@ -1,23 +1,25 @@
 const sendOtp = require('../../mail/send-otp')
 const Otp = require('../../model/otp-modal')
 const generateOtp = require('../../utils/generate-otp')
+const validateUniqueUser = require('../../model/validate-unique-user')
 
 module.exports = async (req, res) => {
   try {
-    const { email } = req.body
-    const code = generateOtp()
-    const existingUser = await Otp.findOne({ email })
+    const email = req.body.email
+    await validateUniqueUser(email)
+    const existingRequest = await Otp.findOne({ email })
 
-    if (existingUser) {
-      existingUser.code = code
-      await existingUser.save()
+    const code = generateOtp()
+    if (existingRequest) {
+      existingRequest.code = code
+      await existingRequest.save()
     } else {
       await Otp.create({ email, code })
     }
 
-    const { accepted } = await sendOtp(email, code)
-    res.success(201, { accepted })
+    sendOtp(email, code)
+    res.success(201, { email })
   } catch (err) {
-    res.fail(err.message)
+    res.fail(err)
   }
 }

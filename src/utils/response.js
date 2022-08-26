@@ -1,6 +1,6 @@
-exports.success = function (...params) {
-  const [data, code = 200] = params.reverse()
+const simplifyError = require('./error')
 
+exports.success = function (code = 200, data = {}) {
   this.status(code).json({
     status: 'success',
     ...data,
@@ -8,7 +8,8 @@ exports.success = function (...params) {
 }
 
 exports.fail = function (...params) {
-  const [message, code = 404] = params.reverse()
+  const [error, code = 404] = params.reverse()
+  const message = simplifyError(error)
 
   this.status(code).json({
     status: 'fail',

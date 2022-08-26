@@ -1,7 +1,6 @@
 module.exports = async (req, res) => {
   try {
-    await req.user.delete()
-    res.success(204)
+    throw new Error('Not found!')
   } catch (err) {
     res.fail(err)
   }

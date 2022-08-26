@@ -1,9 +1,12 @@
+const { readFileSync } = require('fs')
 const transporter = require('./transporter')
+const EMAIL_TEMPLATE = readFileSync(__dirname + '/template.html', 'utf-8')
 
-module.exports = async (to, code) =>
-  transporter.sendMail({
-    from: 'Verifier Bot<quran.web.app@gmail.com>',
+module.exports = async (to, code) => {
+  return transporter.sendMail({
     to,
-    subject: 'Quran account verification code!',
-    html: `<i>${code}</i>`,
+    from: 'Verifier Bot',
+    subject: 'Quran account verification code',
+    html: EMAIL_TEMPLATE.replace('{%CODE%}', code),
   })
+}

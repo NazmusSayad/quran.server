@@ -1,7 +1,7 @@
 const express = require('express')
-const Otp = require('../controller/otp-controller')
 const router = express.Router()
+const OTP = require('../controller/otp-controller')
 
-router.route('/').post(Otp.request).patch(Otp.confirm)
+router.route('/').post(OTP.request)
 
 module.exports = router

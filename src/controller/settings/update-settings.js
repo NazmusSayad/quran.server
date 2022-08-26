@@ -1,7 +1,8 @@
+const User = require('../../model/user-model')
+
 module.exports = async (req, res) => {
   try {
-    await req.user.delete()
-    res.success(204)
+    res.success(202, {})
   } catch (err) {
     res.fail(err)
   }

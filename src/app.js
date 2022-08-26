@@ -1,7 +1,8 @@
 const express = require('express')
 const cors = require('cors')
-const router = require('./router/router')
+const router = require('./router')
 const response = require('./utils/response')
+const errorController = require('./controller/error-controller')
 const app = express()
 
 app.use(cors())
@@ -13,7 +14,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use(`/v1`, router)
+app.use('/v1', router)
+app.use('/*', errorController)
 
 module.exports = app
-

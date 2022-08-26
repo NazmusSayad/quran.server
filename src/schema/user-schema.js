@@ -1,11 +1,19 @@
 const mongoose = require('mongoose')
 
-module.exports = new mongoose.Schema(
+module.exports = mongoose.Schema(
   {
     email: {
       type: 'string',
-      required: true,
       unique: true,
+      required: [true, 'User must have a email.'],
+    },
+    name: {
+      type: 'string',
+      required: [true, 'User must have a name.'],
+    },
+    password: {
+      type: 'string',
+      required: [true, 'User must have a password.'],
     },
   },
   { versionKey: false }

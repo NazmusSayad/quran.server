@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-module.exports = new mongoose.Schema(
+module.exports = mongoose.Schema(
   {
     email: {
       type: 'string',
