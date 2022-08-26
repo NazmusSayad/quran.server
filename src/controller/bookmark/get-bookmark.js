@@ -1,5 +1,5 @@
 const Bookmark = require('../../model/bookmark-model')
-const formatBookmark = require('./format-bookmark')
+const formatBookmark = require('./helpers/format-bookmark')
 
 module.exports = async (req, res) => {
   try {
