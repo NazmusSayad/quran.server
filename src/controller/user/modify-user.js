@@ -7,6 +7,6 @@ module.exports = async (req, res) => {
     const user = await req.user.save()
     res.success(202, { user })
   } catch (err) {
-    res.fail(err)
+    res.fail(404, err)
   }
 }

@@ -9,6 +9,6 @@ module.exports = async (req, res) => {
 
     res.success(202, req.query)
   } catch (err) {
-    res.fail(err)
+    res.fail(404, err)
   }
 }

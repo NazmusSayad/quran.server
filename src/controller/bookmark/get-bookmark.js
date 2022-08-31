@@ -14,6 +14,6 @@ module.exports = async (req, res) => {
     const bookmarks = await bookmarkQuery
     res.success(200, bookmarks)
   } catch (err) {
-    res.fail(err)
+    res.fail(404, err)
   }
 }

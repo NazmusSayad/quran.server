@@ -8,6 +8,6 @@ module.exports = async (req, res) => {
 
     res.success(200, { user })
   } catch (err) {
-    res.fail(err)
+    res.fail(404, err)
   }
 }

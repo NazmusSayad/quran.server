@@ -20,6 +20,6 @@ module.exports = async (req, res) => {
 
     res.success(200, { user: userDoc })
   } catch (err) {
-    res.fail(err)
+    res.fail(404, err)
   }
 }

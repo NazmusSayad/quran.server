@@ -25,6 +25,6 @@ module.exports = async (req, res) => {
 
     res.success(201, { user })
   } catch (err) {
-    res.fail(err)
+    res.fail(404, err)
   }
 }

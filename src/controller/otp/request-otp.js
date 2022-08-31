@@ -21,6 +21,6 @@ module.exports = async (req, res) => {
     sendOtp(email, code)
     res.success(201, { email })
   } catch (err) {
-    res.fail(err)
+    res.fail(404, err)
   }
 }

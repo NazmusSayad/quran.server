@@ -1,18 +1,13 @@
-const { default: mongoose } = require('mongoose')
-
 const duplicateError = err => {
   const field = Object.keys(err?.keyValue)
-  return [`The given ${field} already exists.`]
+  return [`The given ${field} already exists`]
 }
-
 const validationError = err => {
   return Object.values(err?.errors)?.map(error => error?.properties?.message)
 }
-
 const castError = err => {
-  return `Invalid \`${err?.path}\` input.`
+  return `Invalid \`${err?.path}\` input`
 }
-
 const simplifyError = err => {
   if (typeof err === 'string') return err
   if (err?.code === 11000) return duplicateError(err)
@@ -28,18 +23,15 @@ exports.success = function (code, data) {
   })
 }
 
-exports.fail = function (...params) {
-  const [error, code = 404] = params.reverse()
-
-  if (code >= 500 || error.name === 'MongooseError') {
-    return this.status(500).json({
-      status: 'error',
-      message: 'Internal Server Error',
-    })
+exports.fail = function (code, error, type = 'fail') {
+  if (code >= 500 || error.name === 'MongooseError' || type === 'error') {
+    code = 500
+    type = 'error'
+    error = 'Internal Server Error'
   }
 
   this.status(code).json({
-    status: 'fail',
+    status: type,
     message: simplifyError(error),
   })
 }

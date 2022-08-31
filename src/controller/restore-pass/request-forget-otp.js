@@ -23,6 +23,6 @@ module.exports = async (req, res) => {
 
     sendOtp(email, code)
   } catch (err) {
-    res.fail(err)
+    res.fail(404, err)
   }
 }
