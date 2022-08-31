@@ -31,7 +31,7 @@ exports.success = function (code, data) {
 exports.fail = function (...params) {
   const [error, code = 404] = params.reverse()
 
-  if (error.name === 'MongooseError') {
+  if (code >= 500 || error.name === 'MongooseError') {
     return this.status(500).json({
       status: 'error',
       message: 'Internal Server Error',
