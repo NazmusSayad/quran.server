@@ -6,6 +6,8 @@ module.exports = async (req, res) => {
     await Bookmark.findByIdAndUpdate(req.user.bookmarks, {
       $unset: formatQuery(req.query),
     })
+      .select('')
+      .lean()
 
     res.success(204)
   } catch (err) {

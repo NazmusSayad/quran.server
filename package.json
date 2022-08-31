@@ -4,8 +4,6 @@
     "start": "nodemon .",
     "serve": "node ."
   },
-  "author": "Nazmus Sayad",
-  "license": "ISC",
   "engines": {
     "node": "v16.16.0"
   },
@@ -17,6 +15,9 @@
     "mongoose": "^6.5.3",
     "nodemailer": "^6.7.8"
   },
+  
+  "author": "Nazmus Sayad",
+  "license": "ISC",
   "name": "quran",
   "version": "1.0.0",
   "description": "quran app backend",

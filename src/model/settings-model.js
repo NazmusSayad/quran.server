@@ -1,4 +1,4 @@
 const mongoose = require('mongoose')
 const settingsSchema = require('../schema/settings-schema')
 
-module.exports = mongoose.model('Settings', settingsSchema)
+module.exports = mongoose.model('settings', settingsSchema)

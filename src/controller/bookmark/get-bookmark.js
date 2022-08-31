@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
       bookmarkQuery = bookmarkQuery.select('surahs')
     }
 
-    const bookmarks = await bookmarkQuery
+    const bookmarks = await bookmarkQuery.lean()
     res.success(200, bookmarks)
   } catch (err) {
     res.fail(404, err)

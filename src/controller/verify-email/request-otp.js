@@ -1,6 +1,6 @@
-const sendOtp = require('../../mail/send-otp')
+const sendVerifyEmailCOde = require('../../mail/send-verify-email')
 const validateUniqueUser = require('../../model/validate-unique-user')
-const OTP = require('../../model/otp-model')
+const VerifyEmail = require('../../model/verify-email-model')
 const generateOtp = require('../../utils/generate-otp')
 
 module.exports = async (req, res) => {
@@ -8,17 +8,17 @@ module.exports = async (req, res) => {
     const email = req.body.email
     await validateUniqueUser(email)
     
-    const existingRequest = await OTP.findOne({ email })
+    const existingRequest = await VerifyEmail.findOne({ email })
     const code = generateOtp(6)
     
     if (existingRequest) {
       existingRequest.code = code
       await existingRequest.save()
     } else {
-      await OTP.create({ email, code })
+      await VerifyEmail.create({ email, code })
     }
 
-    sendOtp(email, code)
+    sendVerifyEmailCOde(email, code)
     res.success(201, { email })
   } catch (err) {
     res.fail(404, err)

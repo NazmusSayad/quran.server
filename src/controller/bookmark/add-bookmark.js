@@ -3,9 +3,13 @@ const formatQuery = require('../../utils/format-query')
 
 module.exports = async (req, res) => {
   try {
-    await Bookmark.findByIdAndUpdate(req.user.bookmarks, {
+    const bo = await Bookmark.findByIdAndUpdate(req.user.bookmarks, {
       $set: formatQuery(req.query),
     })
+      .select('')
+      .lean()
+
+    console.log(bo)
 
     res.success(202, req.query)
   } catch (err) {

@@ -1,8 +1,8 @@
 module.exports = {
   Auth: require('./auth/check-auth'),
 
-  emailVerify: {
-    request: require('./otp/request-otp'),
+  verifyEmail: {
+    request: require('./verify-email/request-otp'),
   },
 
   restorePass: {

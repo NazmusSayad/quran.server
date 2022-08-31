@@ -1,7 +1,7 @@
 const User = require('../../model/user-model')
 const Forget = require('../../model/forget-pass-model')
 const generateOtp = require('../../utils/generate-otp')
-const sendOtp = require('../../mail/send-forget-pass')
+const sendForgetPassOTP = require('../../mail/send-forget-pass')
 
 module.exports = async (req, res) => {
   try {
@@ -11,8 +11,8 @@ module.exports = async (req, res) => {
     res.success(200, { email })
     if (!user) return
 
-    const code = generateOtp(8)
     const existingRequest = await Forget.findOne({ user })
+    const code = generateOtp(8)
 
     if (existingRequest) {
       existingRequest.code = code
@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
       Forget.create({ user, code })
     }
 
-    sendOtp(email, code)
+    sendForgetPassOTP(email, code)
   } catch (err) {
     res.fail(404, err)
   }
