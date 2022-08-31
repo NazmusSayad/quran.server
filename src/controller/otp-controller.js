@@ -1,1 +1,0 @@
-exports.request = require('./otp/request-otp')

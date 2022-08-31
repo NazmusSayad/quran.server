@@ -1,8 +1,15 @@
 const validateUniqueUser = require('../../model/validate-unique-user')
-const getMatchedOtp = require('../../model/validate-otp')
 const Bookmark = require('../../model/bookmark-model')
 const Settings = require('../../model/settings-model')
 const User = require('../../model/user-model')
+const OTP = require('../../model/otp-model')
+
+const getMatchedOtp = async (email, code) => {
+  const existingUser = await OTP.findOne({ email })
+  if (existingUser == null) throw new Error('User never requested for OTP.')
+  if (existingUser?.code !== code) throw new Error('Wrong information.')
+  return existingUser
+}
 
 module.exports = async (req, res) => {
   try {
