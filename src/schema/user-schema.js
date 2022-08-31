@@ -9,15 +9,15 @@ module.exports = mongoose.Schema(
       unique: true,
       immutable: true,
       lowercase: true,
-      required: [true, 'User must have a email.'],
+      required: [true, 'User must have a email'],
     },
     name: {
       type: String,
-      required: [true, 'User must have a name.'],
+      required: [true, 'User must have a name'],
     },
     password: {
       type: String,
-      required: [true, 'User must have a password.'],
+      required: [true, 'User must have a password'],
     },
     settings: {
       type: mongoose.Types.ObjectId,

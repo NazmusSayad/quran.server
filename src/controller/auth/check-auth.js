@@ -1,6 +1,6 @@
 const { compare } = require('bcrypt')
 const User = require('../../model/user-model.js')
-const authError = new Error('Email or password is wrong.')
+const authError = new Error('Email or password is wrong')
 
 module.exports = async (req, res, next) => {
   try {

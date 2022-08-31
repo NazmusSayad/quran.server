@@ -6,8 +6,8 @@ const OTP = require('../../model/otp-model')
 
 const getMatchedOtp = async (email, code) => {
   const existingUser = await OTP.findOne({ email })
-  if (existingUser == null) throw new Error('User never requested for OTP.')
-  if (existingUser?.code !== code) throw new Error('Wrong information.')
+  if (existingUser == null) throw new Error('User never requested for OTP')
+  if (existingUser?.code !== code) throw new Error('Wrong information')
   return existingUser
 }
 

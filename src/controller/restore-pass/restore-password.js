@@ -1,6 +1,6 @@
 const Forget = require('../../model/forget-pass-model')
 const User = require('../../model/user-model')
-const failError = new Error('Wrong information.')
+const failError = new Error('Wrong information')
 
 module.exports = async (req, res) => {
   try {

@@ -1,3 +1,5 @@
+const { default: mongoose } = require('mongoose')
+
 const duplicateError = err => {
   const field = Object.keys(err?.keyValue)
   return [`The given ${field} already exists.`]
@@ -28,10 +30,16 @@ exports.success = function (code, data) {
 
 exports.fail = function (...params) {
   const [error, code = 404] = params.reverse()
-  const message = simplifyError(error)
+
+  if (error.name === 'MongooseError') {
+    return this.status(500).json({
+      status: 'error',
+      message: 'Internal Server Error',
+    })
+  }
 
   this.status(code).json({
     status: 'fail',
-    message,
+    message: simplifyError(error),
   })
 }
