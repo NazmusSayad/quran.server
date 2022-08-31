@@ -1,6 +1,6 @@
 const simplifyError = require('./error')
 
-exports.success = function (code = 200, data = {}) {
+exports.success = function (code = 200, data = null) {
   this.status(code).json({
     status: 'success',
     data,

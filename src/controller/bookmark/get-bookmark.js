@@ -1,5 +1,4 @@
 const Bookmark = require('../../model/bookmark-model')
-const formatBookmark = require('./helpers/format-bookmark')
 
 module.exports = async (req, res) => {
   try {
@@ -13,7 +12,7 @@ module.exports = async (req, res) => {
     }
 
     const bookmarks = await bookmarkQuery
-    res.success(200, formatBookmark(bookmarks._doc))
+    res.success(200, bookmarks)
   } catch (err) {
     res.fail(err)
   }

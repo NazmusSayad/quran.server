@@ -1,14 +1,19 @@
 const { compare } = require('bcrypt')
 const User = require('../../model/user-model.js')
+const wrongInfoError = new Error('Email or password is wrong.')
 
 module.exports = async (req, res, next) => {
   try {
-    const { email, password } = req.headers
-    const user = await User.findOne({ email })
+    const { email, password, token = '' } = req.headers
 
-    if (user == null || !(await compare(user.password, password))) {
-      throw new Error('Email or password is wrong.')
-    }
+    console.time('Auth: ')
+    const user = await User.findOne({ email })
+    console.timeEnd('Auth: ')
+
+    const userVerified =
+      user &&
+      (user.password === password || (await compare(user.password, token)))
+    if (!userVerified) throw wrongInfoError
 
     req.user = user
     req.userToken = password
