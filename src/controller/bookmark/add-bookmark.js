@@ -3,6 +3,7 @@ const formatQuery = require('../../utils/format-query')
 
 module.exports = async (req, res) => {
   try {
+    // HACK
     const bo = await Bookmark.findByIdAndUpdate(req.user.bookmarks, {
       $set: formatQuery(req.query),
     })
