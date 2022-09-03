@@ -1,12 +1,11 @@
-module.exports = async (req, res) => {
-  try {
-    for (let key in req.body) {
-      req.user[key] = req.body[key]
-    }
+const AppError = require('../../error/app-error.js')
+const catchAsync = require('../../error/catch-async.js')
 
-    const user = await req.user.save()
-    res.success(202, { user })
-  } catch (err) {
-    res.fail(404, err)
+module.exports = catchAsync(async (req, res) => {
+  for (let key in req.body) {
+    req.user[key] = req.body[key]
   }
-}
+
+  const user = await req.user.save()
+  res.success({ user })
+})

@@ -1,9 +1,7 @@
 const User = require('../../model/user-model')
+const AppError = require('../../error/app-error.js')
+const catchAsync = require('../../error/catch-async.js')
 
-module.exports = async (req, res) => {
-  try {
-    res.success(200, {})
-  } catch (err) {
-    res.fail(404, err)
-  }
-}
+module.exports = catchAsync(async (req, res) => {
+  res.success()
+})
