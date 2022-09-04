@@ -1,4 +1,6 @@
-global.ReqError = require('./core/req-error')
+const core = require('./core')
+global.ReqError = core.ReqError
+global.catchAsync = core.catchAsync
 const mongoose = require('mongoose')
 const app = require('./app')
 

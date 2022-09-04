@@ -1,7 +1,5 @@
 const Forget = require('../../model/forget-pass-model')
 const User = require('../../model/user-model')
-const { catchAsync } = require('../../core')
-
 const failError = new ReqError('Wrong information', 403)
 
 module.exports = catchAsync(async (req, res) => {
@@ -9,15 +7,13 @@ module.exports = catchAsync(async (req, res) => {
   const user = await User.findOne({ email })
   if (!user) throw failError
 
-  const request = await Forget.findOne({ user: user._id })
-  if (!request || request.code !== code) throw failError
+  const forgetPassRequest = await Forget.findById(user._id)
+  if (!forgetPassRequest || forgetPassRequest.code !== code) throw failError
 
   user.password = password
   await user.save()
-  await request.delete()
+  await forgetPassRequest.delete()
 
-  const userDoc = user._doc
-  delete userDoc.password
-
-  res.success({ user: userDoc })
+  const token = await jwt.generate(user._id)
+  res.success({ token })
 })

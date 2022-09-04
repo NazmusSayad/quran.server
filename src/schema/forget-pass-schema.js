@@ -21,5 +21,3 @@ module.exports = mongoose.Schema(
   },
   { versionKey: false }
 )
-
-FORGET_PASS_OTP_EXPIRE_DURATION

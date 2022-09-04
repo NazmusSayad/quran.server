@@ -1,18 +1,21 @@
 module.exports = {
-  Auth: require('./auth/check-auth'),
-
   verifyEmail: {
     request: require('./verify-email/request-otp'),
   },
 
+  auth: {
+    check: require('./auth/check-auth-middlewire'),
+    login: require('./auth/login-controller'),
+    signup: require('./auth/signup-controller'),
+  },
+
   restorePass: {
-    request: require('./restore-pass/request-forget-otp'),
-    restore: require('./restore-pass/restore-password'),
+    request: require('./auth/request-forget-otp'),
+    restore: require('./auth/restore-password'),
   },
 
   user: {
     get: require('./user/get-user'),
-    create: require('./user/create-user'),
     modify: require('./user/modify-user'),
     delete: require('./user/delete-user'),
   },

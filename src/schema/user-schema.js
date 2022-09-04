@@ -1,8 +1,6 @@
 const mongoose = require('mongoose')
-const settingsSchema = require('./settings-schema')
-const bookmarkSchema = require('./bookmark-schema')
 
-module.exports = mongoose.Schema(
+const userSchema = mongoose.Schema(
   {
     email: {
       type: String,
@@ -19,14 +17,13 @@ module.exports = mongoose.Schema(
       type: String,
       required: [true, 'User must have a password'],
     },
-    settings: {
-      type: mongoose.Types.ObjectId,
-      ref: 'Settings',
-    },
-    bookmarks: {
-      type: mongoose.Types.ObjectId,
-      ref: 'Bookmark',
+    passwordModifiedAt: {
+      type: Date,
+      required: true,
+      default: Date.now,
     },
   },
   { versionKey: false }
 )
+
+module.exports = userSchema

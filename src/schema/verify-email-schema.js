@@ -3,12 +3,6 @@ const { VERIFY_EMAIL_EXPIRE_DURATION } = require('../config/config')
 
 module.exports = mongoose.Schema(
   {
-    email: {
-      type: 'string',
-      required: true,
-      unique: true,
-      lowercase: true,
-    },
     code: {
       type: 'string',
       required: true,

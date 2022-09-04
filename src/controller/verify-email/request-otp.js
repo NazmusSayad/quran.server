@@ -2,11 +2,9 @@ const sendVerifyEmailCOde = require('../../mail/send-verify-email')
 const validateUniqueUser = require('../../model/validate-unique-user')
 const VerifyEmail = require('../../model/verify-email-model')
 const generateOtp = require('../../utils/generate-otp')
-const { catchAsync } = require('../../core')
-
 
 module.exports = catchAsync(async (req, res) => {
-  const email = req.body.email
+  const { email } = req.body
   await validateUniqueUser(email)
 
   const existingRequest = await VerifyEmail.findOne({ email })

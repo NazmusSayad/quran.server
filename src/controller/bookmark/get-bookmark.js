@@ -1,8 +1,7 @@
 const Bookmark = require('../../model/bookmark-model')
-const { catchAsync } = require('../../core')
 
 module.exports = catchAsync(async (req, res) => {
-  let bookmarkQuery = Bookmark.findById(req.user.bookmarks)
+  let bookmarkQuery = Bookmark.findById(req.user._id)
 
   if (req.query.verses !== undefined) {
     bookmarkQuery = bookmarkQuery.select('verses')
@@ -12,5 +11,8 @@ module.exports = catchAsync(async (req, res) => {
   }
 
   const bookmarks = await bookmarkQuery.lean()
+  bookmarks._id = undefined
+  bookmarks.verses ||= {}
+  bookmarks.surahs ||= {}
   res.success(bookmarks)
 })
