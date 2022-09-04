@@ -10,8 +10,8 @@ router
   .delete(controller.user.delete)
 
 router
-  .route('/settings')
-  .all(controller.auth.check)
+  .route('/settings') // Enable auth in prod mode :)
+  // .all(controller.auth.check)
   .get(controller.settings.get)
   .patch(controller.settings.update)
 

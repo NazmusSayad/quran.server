@@ -2,9 +2,8 @@ const User = require('../../model/user-model.js')
 const jwt = require('../../utils/jwt-token')
 
 module.exports = catchAsync(async (req, res, next) => {
-  const { authorization } = req.headers
-  const token =
-    authorization?.startsWith('Bearer ') && authorization?.split('Bearer ')[1]
+  const { authorization = '' } = req.headers
+  const [token] = authorization.match(/(?<=^Bearer )(?:\S*)$/) || []
   if (!token) throw new ReqError('Invalid token', 401)
 
   const decodedToken = await jwt.verify(token)

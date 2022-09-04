@@ -1,3 +1,6 @@
 module.exports = catchAsync(async (req, res) => {
-  res.success('TODO')
+  throw new ReqError(
+    '// TODO: This feature will be added after finishing frontend.',
+    501
+  )
 })
