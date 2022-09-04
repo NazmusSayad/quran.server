@@ -1,6 +1,5 @@
 const { compare } = require('bcrypt')
-const AppError = require('../../error/app-error.js')
-const catchAsync = require('../../error/catch-async.js')
+const { catchAsync } = require('../../core')
 const User = require('../../model/user-model.js')
 
 module.exports = catchAsync(async (req, res, next) => {
@@ -11,7 +10,7 @@ module.exports = catchAsync(async (req, res, next) => {
     user &&
     (user.password === password || (await compare(user.password, token)))
 
-  if (!userConfirmed) throw new AppError('Email or password is wrong', 401)
+  if (!userConfirmed) throw new ReqError('Email or password is wrong', 401)
 
   req.user = user
   req.userToken = password

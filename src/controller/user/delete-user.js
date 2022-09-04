@@ -1,8 +1,8 @@
 const Bookmark = require('../../model/bookmark-model')
 const Settings = require('../../model/settings-model')
 const Forget = require('../../model/forget-pass-model')
-const AppError = require('../../error/app-error.js')
-const catchAsync = require('../../error/catch-async.js')
+const { catchAsync } = require('../../core')
+
 
 module.exports = catchAsync(async (req, res) => {
   await Bookmark.findByIdAndDelete(req.user.bookmarks)

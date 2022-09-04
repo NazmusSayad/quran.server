@@ -1,11 +1,11 @@
 {
   "main": "index.js",
   "scripts": {
-    "start": "nodemon .",
-    "serve": "node ."
+    "start": "nodemon ./index.dev.js",
+    "serve": "node ./index.js"
   },
   "engines": {
-    "node": "v16.16.0"
+    "node": ">=v16.0.0"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -15,7 +15,6 @@
     "mongoose": "^6.5.3",
     "nodemailer": "^6.7.8"
   },
-  
   "author": "Nazmus Sayad",
   "license": "ISC",
   "name": "quran",

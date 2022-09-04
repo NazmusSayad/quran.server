@@ -1,5 +1,5 @@
-const AppError = require('../../error/app-error.js')
-const catchAsync = require('../../error/catch-async.js')
+const { catchAsync } = require('../../core')
+
 
 module.exports = catchAsync(async (req, res) => {
   for (let key in req.body) {

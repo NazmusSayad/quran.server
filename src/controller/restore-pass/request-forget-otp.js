@@ -2,8 +2,8 @@ const User = require('../../model/user-model')
 const Forget = require('../../model/forget-pass-model')
 const generateOtp = require('../../utils/generate-otp')
 const sendForgetPassOTP = require('../../mail/send-forget-pass')
-const AppError = require('../../error/app-error.js')
-const catchAsync = require('../../error/catch-async.js')
+const { catchAsync } = require('../../core')
+
 
 module.exports = catchAsync(async (req, res) => {
   const { email } = req.body

@@ -1,6 +1,5 @@
 const Bookmark = require('../../model/bookmark-model')
-const AppError = require('../../error/app-error.js')
-const catchAsync = require('../../error/catch-async.js')
+const { catchAsync } = require('../../core')
 
 module.exports = catchAsync(async (req, res) => {
   let bookmarkQuery = Bookmark.findById(req.user.bookmarks)

@@ -3,13 +3,13 @@ const Bookmark = require('../../model/bookmark-model')
 const Settings = require('../../model/settings-model')
 const User = require('../../model/user-model')
 const VerifyEmail = require('../../model/verify-email-model')
-const AppError = require('../../error/app-error.js')
-const catchAsync = require('../../error/catch-async.js')
+const { catchAsync } = require('../../core')
+
 
 const getMatchedOtp = async (email, code) => {
   const existingUser = await VerifyEmail.findOne({ email })
-  if (existingUser == null) throw new AppError('User never requested for OTP')
-  if (existingUser?.code !== code) throw new AppError('Wrong information', 403)
+  if (existingUser == null) throw new ReqError('User never requested for OTP')
+  if (existingUser?.code !== code) throw new ReqError('Wrong information', 403)
   return existingUser
 }
 

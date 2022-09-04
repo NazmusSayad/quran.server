@@ -1,8 +1,8 @@
 const Forget = require('../../model/forget-pass-model')
 const User = require('../../model/user-model')
-const AppError = require('../../error/app-error.js')
-const catchAsync = require('../../error/catch-async.js')
-const failError = new AppError('Wrong information', 403)
+const { catchAsync } = require('../../core')
+
+const failError = new ReqError('Wrong information', 403)
 
 module.exports = catchAsync(async (req, res) => {
   const { email, code, password } = req.body
