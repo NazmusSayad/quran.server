@@ -1,5 +1,5 @@
 const sendVerifyEmailCOde = require('../../mail/send-verify-email')
-const validateUniqueUser = require('../../model/validate-unique-user')
+const validateUniqueUser = require('../../model/_validate-unique-user')
 const VerifyEmail = require('../../model/verify-email-model')
 const generateOtp = require('../../utils/generate-otp')
 
@@ -17,6 +17,6 @@ module.exports = catchAsync(async (req, res) => {
     await VerifyEmail.create({ email, code })
   }
 
-  sendVerifyEmailCOde(email, code)
+  sendVerifyEmailCOde(email, code).catch(() => {})
   res.success({ email }, 201)
 })

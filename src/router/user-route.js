@@ -1,25 +1,24 @@
 const express = require('express')
-const router = express.Router()
+const route = express.Router()
 const controller = require('../controller')
 
-router
+route.use(controller.auth.check)
+
+route
   .route('/')
-  .all(controller.auth.check)
   .get(controller.user.get)
   .patch(controller.user.modify)
   .delete(controller.user.delete)
 
-router
-  .route('/settings') // Enable auth in prod mode :)
-  // .all(controller.auth.check)
+route
+  .route('/settings')
   .get(controller.settings.get)
   .patch(controller.settings.update)
 
-router
+route
   .route('/bookmarks')
-  .all(controller.auth.check)
   .get(controller.bookmarks.get)
   .post(controller.bookmarks.add)
   .delete(controller.bookmarks.delete)
 
-module.exports = router
+module.exports = route

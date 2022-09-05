@@ -5,8 +5,8 @@ module.exports = {
 
   auth: {
     check: require('./auth/check-auth-middlewire'),
-    login: require('./auth/login-controller'),
-    signup: require('./auth/signup-controller'),
+    login: require('./auth/user-login'),
+    signup: require('./auth/user-signup'),
   },
 
   restorePass: {

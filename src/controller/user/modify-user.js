@@ -1,4 +1,4 @@
-const filterRequestBody = require('./helper/filter-request-body.')
+const filterRequestBody = require('./_filter-request-body')
 
 module.exports = catchAsync(async (req, res) => {
   const body = filterRequestBody(req.body)

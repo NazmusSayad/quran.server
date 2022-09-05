@@ -10,15 +10,17 @@ module.exports = catchAsync(async (req, res) => {
   res.success({ email })
   if (!userId) return // Don't let the user know that there was no user and the email isn't sent.
 
-  const existingRequest = await Forget.findById(userId)
-  const code = generateOtp(8)
+  try {
+    const existingRequest = await Forget.findById(userId)
+    const code = generateOtp(8)
 
-  if (existingRequest) {
-    existingRequest.code = code
-    existingRequest.save()
-  } else {
-    Forget.create({ _id: userId, code })
-  }
+    if (existingRequest) {
+      existingRequest.code = code
+      await existingRequest.save()
+    } else {
+      await Forget.create({ _id: userId, code })
+    }
 
-  sendForgetPassOTP(email, code)
+    await sendForgetPassOTP(email, code)
+  } catch {}
 })

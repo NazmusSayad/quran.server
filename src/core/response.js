@@ -19,9 +19,9 @@ const respondErrorDev = (err, req, res, next) => {
 
   res.status(code).json({
     status: code < 500 ? 'fail' : 'error',
-    message: message,
+    message,
     error: err,
-    error_stack: err.stack,
+    stack: err.stack,
   })
 }
 

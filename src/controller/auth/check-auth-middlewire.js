@@ -12,7 +12,7 @@ module.exports = catchAsync(async (req, res, next) => {
   const user = await User.findById(decodedToken.id)
   if (!user) throw new ReqError('User no longer exists', 401)
 
-  if (await user.passwordChangedAfter(decodedToken.iat)) {
+  if (user.passwordChangedAfter(decodedToken.iat)) {
     throw new ReqError('Password changed!', 401)
   }
 

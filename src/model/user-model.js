@@ -17,11 +17,11 @@ userSchema.methods.getSafeInfo = function () {
   }
 }
 
-userSchema.methods.checkPassword = async function (data) {
-  return await compare(data, this.password)
+userSchema.methods.checkPassword = function (data) {
+  return compare(data, this.password)
 }
 
-userSchema.methods.passwordChangedAfter = async function (queryTime) {
+userSchema.methods.passwordChangedAfter = function (queryTime) {
   if (this?.passwordModifiedAt) {
     const lastModifiedInMS = this.passwordModifiedAt.getTime()
     const queryTimeInMS = queryTime * 1000
