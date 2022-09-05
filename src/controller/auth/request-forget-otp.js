@@ -8,7 +8,7 @@ module.exports = catchAsync(async (req, res) => {
   const userId = (await User.findOne({ email }).lean())?._id
 
   res.success({ email })
-  if (!userId) return // Don't let the user know that there was no user and the email isn't sent.
+  if (!userId) return // Don't let the user know that there was no user and the email wasn't sent.
 
   try {
     const existingRequest = await Forget.findById(userId)

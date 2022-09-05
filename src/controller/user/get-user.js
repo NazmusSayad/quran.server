@@ -5,8 +5,13 @@ module.exports = catchAsync(async (req, res) => {
   const user = req.user.getSafeInfo()
 
   if (req.query.expand !== undefined) {
-    user.bookmarks = await Bookmark.findById(req.user._id).select('-_id').lean()
-    user.settings = await Settings.findById(req.user._id).select('-_id').lean()
+    const [bookmarks, settings] = await Promise.all([
+      Bookmark.findById(req.user._id).select('-_id').lean(),
+      Settings.findById(req.user._id).select('-_id').lean(),
+    ])
+
+    user.bookmarks = bookmarks
+    user.settings = settings
   }
 
   res.success({ user })
