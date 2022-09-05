@@ -7,6 +7,7 @@ userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next()
   this.password = await hash(this.password, BCRYPT_SALT_ROUND)
   this.passwordModifiedAt = Date.now()
+  console.log('Password changed time updated!')
   next()
 })
 
