@@ -7,7 +7,6 @@ userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next()
   this.password = await hash(this.password, BCRYPT_SALT_ROUND)
   this.passwordModifiedAt = Date.now()
-  console.log('Password changed time updated!')
   next()
 })
 
@@ -24,9 +23,8 @@ userSchema.methods.getSafeInfo = function () {
 
 userSchema.methods.passwordChangedAfter = function (queryTime) {
   if (this?.passwordModifiedAt) {
-    const lastModifiedInMS = this.passwordModifiedAt.getTime()
-    const queryTimeInMS = queryTime * 1000
-    return lastModifiedInMS > queryTimeInMS
+    const lastModified = Math.floor(this.passwordModifiedAt.getTime() / 1000)
+    return lastModified > queryTime
   }
   return false
 }

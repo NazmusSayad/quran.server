@@ -10,7 +10,8 @@ module.exports = ({ surah, verse }) => {
   }
 
   if (surah) {
-    if (!surahRegex.test(surah)) throw new ReqError('Invalid surah', 400)
+    if (surah > 114 || surah < 1 || !surahRegex.test(surah))
+      throw new ReqError('Invalid surah', 400)
     newBookmarkObj['surahs.' + surah] = 1
   }
 

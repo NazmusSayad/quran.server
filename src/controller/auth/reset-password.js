@@ -13,9 +13,8 @@ module.exports = catchAsync(async (req, res) => {
     throw failError
 
   user.password = new_password
-  await user.save()
-  await forgetPassRequest.delete()
+  await Promise.all([user.save(), forgetPassRequest.delete()])
 
-  const token = await jwt.generate(user._id)
+  const token = jwt.generate(user._id)
   res.success({ token })
 })

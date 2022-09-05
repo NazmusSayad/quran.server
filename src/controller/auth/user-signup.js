@@ -14,9 +14,12 @@ module.exports = catchAsync(async (req, res) => {
     throw new ReqError('Wrong information', 403)
 
   const { _id } = await User.create({ name, email, password })
-  await verifyEmailReq.delete()
-  await Bookmark.create({ _id })
-  await Settings.create({ _id })
+
+  await Promise.all([
+    verifyEmailReq.delete(),
+    Bookmark.create({ _id }),
+    Settings.create({ _id }),
+  ])
 
   const token = jwt.generate(_id)
   res.success({ token }, 201)

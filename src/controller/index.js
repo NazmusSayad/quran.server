@@ -11,7 +11,7 @@ module.exports = {
 
   restorePass: {
     request: require('./auth/request-forget-otp'),
-    restore: require('./auth/restore-password'),
+    restore: require('./auth/reset-password'),
   },
 
   user: {

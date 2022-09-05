@@ -12,6 +12,6 @@ module.exports = catchAsync(async (req, res) => {
     user && (await user.checkPassword(password, user.password))
   if (!userChecked) throw new ReqError('Email or password is wrong', 401)
 
-  const token = await jwt.generate(user._id)
+  const token = jwt.generate(user._id)
   res.success({ token })
 })

@@ -3,9 +3,12 @@ const Settings = require('../../model/settings-model')
 const Forget = require('../../model/forget-pass-model')
 
 module.exports = catchAsync(async (req, res) => {
-  await Forget.findByIdAndDelete(req.user._id)
-  await Bookmark.findByIdAndDelete(req.user._id)
-  await Settings.findByIdAndDelete(req.user._id)
-  await req.user.delete()
+  await Promise.all([
+    Forget.findByIdAndDelete(req.user._id),
+    Bookmark.findByIdAndDelete(req.user._id),
+    Settings.findByIdAndDelete(req.user._id),
+    req.user.delete(),
+  ])
+
   res.success(null, 204)
 })
