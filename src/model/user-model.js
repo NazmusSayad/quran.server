@@ -10,15 +10,15 @@ userSchema.pre('save', async function (next) {
   next()
 })
 
+userSchema.methods.checkPassword = function (data) {
+  return compare(data, this.password)
+}
+
 userSchema.methods.getSafeInfo = function () {
   return {
     name: this.name,
     email: this.email,
   }
-}
-
-userSchema.methods.checkPassword = function (data) {
-  return compare(data, this.password)
 }
 
 userSchema.methods.passwordChangedAfter = function (queryTime) {

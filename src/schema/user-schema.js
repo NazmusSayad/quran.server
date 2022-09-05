@@ -5,7 +5,6 @@ const userSchema = mongoose.Schema(
     email: {
       type: String,
       unique: true,
-      immutable: true,
       lowercase: true,
       required: [true, 'User must have a email'],
     },

@@ -22,5 +22,7 @@ module.exports = catchAsync(async (req, res) => {
     }
 
     await sendForgetPassOTP(email, code)
-  } catch {}
+  } catch (err) {
+    console.warn(err)
+  }
 })

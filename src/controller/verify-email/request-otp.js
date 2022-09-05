@@ -1,11 +1,13 @@
-const sendVerifyEmailCOde = require('../../mail/send-verify-email')
-const validateUniqueUser = require('../../model/_validate-unique-user')
+const User = require('../../model/user-model')
 const VerifyEmail = require('../../model/verify-email-model')
+const sendVerifyEmailCOde = require('../../mail/send-verify-email')
 const generateOtp = require('../../utils/generate-otp')
 
 module.exports = catchAsync(async (req, res) => {
   const { email } = req.body
-  await validateUniqueUser(email)
+  if (await User.findOne({ email })) {
+    throw new ReqError('Another account associated with this email', 400)
+  }
 
   const existingRequest = await VerifyEmail.findOne({ email })
   const code = generateOtp(6)

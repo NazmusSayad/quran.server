@@ -10,6 +10,9 @@ route
   .patch(controller.user.modify)
   .delete(controller.user.delete)
 
+route.route('/email').patch(controller.user.updateEmail)
+route.route('/password').patch(controller.user.updatePass)
+
 route
   .route('/settings')
   .get(controller.settings.get)

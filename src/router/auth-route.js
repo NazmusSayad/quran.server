@@ -7,6 +7,6 @@ router.route('/signup').post(controller.auth.signup)
 router
   .route('/forget-pass')
   .post(controller.restorePass.request)
-  .put(controller.restorePass.restore)
+  .patch(controller.restorePass.restore)
 
 module.exports = router

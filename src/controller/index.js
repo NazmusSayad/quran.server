@@ -16,8 +16,10 @@ module.exports = {
 
   user: {
     get: require('./user/get-user'),
-    modify: require('./user/modify-user'),
     delete: require('./user/delete-user'),
+    modify: require('./user/modify-user'),
+    updateEmail: require('./user/update-email'),
+    updatePass: require('./user/update-password'),
   },
 
   settings: {
