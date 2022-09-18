@@ -7,7 +7,10 @@ module.exports = catchAsync(async (req, res) => {
   const { email } = req.body
   const userId = (await User.findOne({ email }).lean())?._id
 
-  res.success({ email })
+  res.success({
+    email,
+    message: `Email sent to ${email}, if the any user exists with the email`,
+  })
   if (!userId) return // Don't let the user know that there was no user and the email wasn't sent.
 
   try {
